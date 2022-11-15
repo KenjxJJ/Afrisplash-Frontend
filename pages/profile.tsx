@@ -1,7 +1,6 @@
 import { NextPage } from "next";
 import AdminLayout from "layouts/adminLayout";
 import { useState } from "react";
-import { describe } from "node:test";
 
 interface Recruiter {
     name: string,
@@ -14,6 +13,11 @@ interface Recruiter {
     languages: Array<object>,
     experience: Array<object>,
     education: Array<object>
+}
+
+interface recruiterLink {
+    link: string,
+    isSelected: boolean
 }
 
 const RecruiterInfo = {
@@ -75,19 +79,47 @@ const RecruiterInfo = {
     ]
 }
 
+const recruiterLinks = [
+    {
+        link: "My profile",
+        isSelected: false
+    },
+    {
+        link: "My company",
+        isSelected: false
+    }
+]
+
 const RecruiterProfile: NextPage = () => {
     const [recruiterInfo, setRecruiterInfo] = useState<Recruiter>(RecruiterInfo);
+    const [selectedLink, setSelectedLink] = useState<recruiterLink>({ link: "", isSelected: false });
     const { role, company, isActivelyHiring, languages, experience, education,
         desiredSkills, contact, bio } = recruiterInfo;
 
-        
+    const handleSelectedLink = (link: string, isSelected: boolean) => {
+        setSelectedLink({ link, isSelected: !isSelected })
+    }
 
     return (
         <>
             <AdminLayout>
-                <header className="grid grid-flow-col col-span-full p-2 mb-4">
-                    <span className="py-2 px-1 text-primary_green font-bold opacity-95">My profile</span>
-                    <span className="py-2 px-1 text-slate-500">My company</span>
+                <header className="grid grid-flow-col grid-cols-3 col-span-full p-0 mb-4 mt-5 border-b 
+                    font-bold text-base focus:opacity-95 text-slate-500">
+                    {recruiterLinks && (
+                        recruiterLinks.map(({ isSelected, link }, index) => (
+                            <>
+                                <span className="h-auto" key={index}>
+                                    <a href="#" className="block px-2 mr-14 mb-2 hover:text-primary_green 
+                                      hover:cursor-pointer focus:text-primary_green selected:text-primary_green"
+                                        onClick={() => handleSelectedLink(link, isSelected)}>{link}</a>
+
+                                    {selectedLink.isSelected && selectedLink.link === link &&
+                                        <span className="z-20 w-40 block border-b-4 
+                                            border-primary_green rounded-xl"></span>
+                                    }
+                                </span>
+                            </>
+                        )))}
                 </header>
 
                 {/* Bio */}
@@ -174,7 +206,7 @@ const RecruiterProfile: NextPage = () => {
                                     ))
                                 )}
                             </section>
-                            <section className="w-100 px-2 py-4 mx-1  my-3 bg-white rounded-lg shadow-sm">
+                            <section className="w-100 px-2 py-4 mx-1 my-3 bg-white rounded-lg shadow-sm">
                                 <h2>
                                     Education
                                     <span>Edit</span>
