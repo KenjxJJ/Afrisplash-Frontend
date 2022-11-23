@@ -128,3 +128,63 @@ export const applicantsList = [
     isSelected: false,
   },
 ];
+
+
+export const RecruiterInfoData = {
+  name: "Adaeze Ruby",
+  role: "recruiter",
+  company: "IDesign Agency",
+  isActivelyHiring: true,
+  bio: `Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+    Ab sequi itaque vitae expedita placeat eius esse nulla magnam, porro quaerat?`,
+  contact:
+  {
+    email: "kenjx@gmail.com",
+    phone: "+234 8130312056",
+    location: "Nigeria",
+    shouldMakePrivate: true
+  }
+  ,
+  desiredSkills: [
+    "design", "tech", "product"
+  ],
+  languages: [
+    { item: "english", proficiency: "fluent" },
+    { item: "russian", proficiency: "advanced" },
+  ],
+  experience: [
+    {
+      year: "2008 - 2010", company: "Microsoft", role: "UI/UX Designer",
+      description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium voluptatibus reiciendis vel!`
+    },
+    {
+      year: "2016 - 2018", company: "Versuspay", role: "UI/UX Designer",
+      description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium voluptatibus reiciendis vel!`
+    },
+    {
+      year: "2019 - 2021", company: "Qeema", role: "UI/UX Designer",
+      description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium voluptatibus reiciendis vel!`
+    },
+    {
+      year: "2021 - Present", company: "Afrisplash", role: "UI/UX Designer",
+      description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium voluptatibus reiciendis vel!`
+    }
+  ],
+  education: [{
+    year: "2008 - 2010", school: "ATBU Bauchi", role: "UI/UX Designer",
+    description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium voluptatibus reiciendis vel!`
+  },
+  {
+    year: "2016 - 2018", school: "Open Classrooms", role: "UI/UX Designer",
+    description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium voluptatibus reiciendis vel!`
+  },
+  {
+    year: "2019 - 2021", school: "Youtube Design School", role: "UI/UX Designer",
+    description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium voluptatibus reiciendis vel!`
+  },
+  {
+    year: "2021 - 2022", school: "Harvard Design School", role: "UI/UX Designer",
+    description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium voluptatibus reiciendis vel!`
+  }
+  ]
+}
