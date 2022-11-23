@@ -43,11 +43,11 @@ interface recruiterLink {
 
 const recruiterLinks = [
     {
-        link: "My profile",
+        link: "profile",
         isSelected: false
     },
     {
-        link: "My company",
+        link: "company",
         isSelected: false
     }
 ]
@@ -76,14 +76,14 @@ const RecruiterProfile: NextPage = () => {
                             recruiterLinks.map(({ isSelected, link }, index) => (
                                 <>
                                     <span className="h-auto" key={index}>
-                                        <a href="#" className="block px-2 mr-14 mb-2 hover:text-primary_green 
+                                        <a href={link} className="block px-2 mr-14 mb-2 hover:text-primary_green 
                                       hover:cursor-pointer focus-visible:text-primary_green selected:text-primary_green"
                                             onClick={() => handleSelectedLink(link, isSelected)}
                                             style={{
                                                 color: selectedLink.isSelected && selectedLink.link === link
                                                     ? "rgba(13,85,32,1)" : ""
                                             }}
-                                        >{link}</a>
+                                        >My {link}</a>
                                         <span className={selectedLink.isSelected && selectedLink.link === link ?
                                             "z-20 w-40 block border-b-4 border-primary_green rounded-xl" : "block h-1"}></span>
                                     </span>
