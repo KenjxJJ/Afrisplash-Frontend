@@ -73,9 +73,9 @@ const RecruiterProfile: NextPage = () => {
                     <div className="grid grid-flow-col grid-cols-2 md:grid-cols-3 col-span-full p-0 mb-4 mt-2 border-b 
                     font-bold text-base focus:opacity-95 text-slate-500">
                         {recruiterLinks && (
-                            recruiterLinks.map(({ isSelected, link }, index) => (
+                            recruiterLinks.map(({ isSelected, link }) => (
                                 <>
-                                    <span className="h-auto" key={index}>
+                                    <span className="h-auto" key={link}>
                                         <a href={link} className="block px-2 mr-14 mb-2 hover:text-primary_green 
                                       hover:cursor-pointer focus-visible:text-primary_green selected:text-primary_green"
                                             onClick={() => handleSelectedLink(link, isSelected)}
