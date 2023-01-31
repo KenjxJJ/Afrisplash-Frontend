@@ -134,19 +134,20 @@ export const RecruiterInfoData = {
   name: "Adaeze Ruby",
   role: "recruiter",
   company: "IDesign Agency",
-  isActivelyHiring: true,
+  hiring: true,
   bio: `Lorem ipsum dolor sit amet consectetur adipisicing elit. 
     Ab sequi itaque vitae expedita placeat eius esse nulla magnam, porro quaerat?`,
-  contact:
-  {
+  contact: {
     email: "kenjx@gmail.com",
     phone: "+234 8130312056",
     location: "Nigeria",
-    shouldMakePrivate: true
+    private: true
   }
   ,
   desiredSkills: [
-    "design", "tech", "product"
+    { type: "design" },
+    { type: "tech" },
+    { type: "product" }
   ],
   languages: [
     { item: "english", proficiency: "fluent" },
