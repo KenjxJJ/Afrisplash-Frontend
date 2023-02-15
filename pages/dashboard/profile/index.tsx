@@ -327,8 +327,3 @@ const RecruiterProfile: NextPage = () => {
 }
 
 export default RecruiterProfile;
-
-function setShowModal(arg0: boolean) {
-    throw new Error("Function not implemented.");
-}
-
