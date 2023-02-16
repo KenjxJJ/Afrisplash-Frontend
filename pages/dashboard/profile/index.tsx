@@ -278,8 +278,8 @@ const RecruiterProfile: NextPage = () => {
                                                     className="hover:cursor-pointer inline-block mb-1" />
                                             </h3>
                                             <div className="pt-1 pb-2 -ml-2">
-                                                {desiredSkills.map(({ type }, index) => (
-                                                    <span key={`${index}-${type}`} className="inline-block rounded-2xl border px-3 py-1.5 m-1 text-sm">{type}</span>
+                                                {desiredSkills.map(({ type }) => (
+                                                    <span key={type} className="inline-block rounded-2xl border px-3 py-1.5 m-1 text-sm">{type}</span>
                                                 ))}
                                             </div>
                                         </div>
@@ -292,9 +292,9 @@ const RecruiterProfile: NextPage = () => {
                                                     className="hover:cursor-pointer inline-block mb-1" />
                                             </h3>
                                             <div className="capitalize pt-2">
-                                                {languages?.map((lang, index) => (
+                                                {languages?.map((lang) => (
                                                     <>
-                                                        <div className="inline-block mr-2 mb-2" key={`${index}-${lang}`}>
+                                                        <div className="inline-block mr-2 mb-2" key={lang?.item}>
                                                             <span className="font-bold">{lang?.item} </span> - <span className="opacity-75">{lang?.proficiency}</span>
                                                         </div>
                                                     </>
