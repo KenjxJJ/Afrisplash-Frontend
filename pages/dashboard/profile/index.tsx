@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, SetStateAction, useState } from "react";
 import { BuildingOfficeIcon, BriefcaseIcon, PencilSquareIcon, InformationCircleIcon } from "@heroicons/react/24/outline";
 import { CheckBadgeIcon } from "@heroicons/react/24/solid";
 import { NextPage } from "next";
@@ -19,7 +19,7 @@ interface Recruiter {
     bio: string,
     hiring: boolean,
     contact: Contact,
-    desiredSkills: Array<string>,
+    desiredSkills: Array<object>,
     languages: Array<Languages>,
     experience: Array<object>,
     education: Array<object>
@@ -37,12 +37,12 @@ interface Languages {
     proficiency: string
 }
 
-interface recruiterLink {
+interface RecruiterLink {
     link: string,
     isSelected: boolean
 }
 
-const recruiterLinks = [
+const RecruiterLinks = [
     {
         link: "profile",
         isSelected: false
@@ -56,13 +56,13 @@ const recruiterLinks = [
 const RecruiterProfile: NextPage = () => {
     const [recruiterInfo, setRecruiterInfo] = useState<Recruiter>(RecruiterInfoData);
     const { name, role, company, hiring, languages, experience, education, desiredSkills, contact, bio } = recruiterInfo;
-    const [selectedLink, setSelectedLink] = useState<recruiterLink>({ link: "", isSelected: false });
+    const [selectedLink, setSelectedLink] = useState<RecruiterLink>({ link: "", isSelected: false });
     const [showExtraInfo, setShowExtraInfo] = useState<boolean>(false);
     const [progressLevel, setProgressLevel] = useState<number>(6);
 
-    const [modal, setModal] = useState(false)
-    const [editTitle, setEditTitle] = useState("form")
-    const [editItems, setEditItems] = useState({})
+    const [modal, setModal] = useState<boolean>(false)
+    const [editTitle, setEditTitle] = useState<string>("form")
+    const [editItems, setEditItems] = useState<object>({})
     const handleSelectedLink = (link: string, isSelected: boolean) => {
         setSelectedLink({ link, isSelected: !isSelected })
     }
@@ -70,7 +70,7 @@ const RecruiterProfile: NextPage = () => {
     const handleCloseExtraInfo = () => setShowExtraInfo(false);
 
     // Close modal
-    const handleEditInfo = ({ section }) => {
+    const handleEditInfo = ({ section }: { section: string }) => {
         switch (section) {
             case "bio":
                 setEditTitle("bio")
@@ -148,7 +148,7 @@ const RecruiterProfile: NextPage = () => {
         })
     }
 
-    const handleSaveEditedItems = (items) => {
+    const handleSaveEditedItems = (items: object) => {
         setRecruiterInfo({
             ...recruiterInfo,
             ...items
@@ -172,9 +172,9 @@ const RecruiterProfile: NextPage = () => {
 
                     <div className="relative">
                         <div className="grid grid-flow-col grid-cols-2 md:grid-cols-3 col-span-full p-0 mb-4 mt-2 border-b 
-                    font-bold text-base focus:opacity-95 text-slate-500">
-                            {recruiterLinks && (
-                                recruiterLinks.map(({ isSelected, link }) => (
+                                font-bold text-base focus:opacity-95 text-slate-500">
+                            {RecruiterLinks && (
+                                RecruiterLinks.map(({ isSelected, link }) => (
                                     <>
                                         <span className="h-auto" key={link}>
                                             <a href={link} className="block px-2 mr-14 mb-2 hover:text-primary_green 
@@ -205,7 +205,7 @@ const RecruiterProfile: NextPage = () => {
                                                 <span className="relative flex justify-center max-w-[100px]">
                                                     <CheckBadgeIcon width={22} height={22}
                                                         className="absolute rounded-full right-0 top-2 bg-white text-yellow-400 z-10" />
-                                                    <Image src={RecruiterPic} className="block rounded-full" />
+                                                    <Image src={RecruiterPic} className="block rounded-full" alt={"Profile Picture"} />
                                                 </span>
                                                 <span className="col-span-2 font-light lg:ml-0 md:-ml-1">
                                                     <p className="text-lg font-bold pb-1 text-black">{name} </p>
@@ -321,7 +321,7 @@ const RecruiterProfile: NextPage = () => {
                         )}
                     </div>
                 </div>
-            </AdminLayout>
+            </AdminLayout >
         </>
     )
 }
