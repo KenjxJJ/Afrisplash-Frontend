@@ -1,4 +1,4 @@
-import { ChangeEvent, SetStateAction, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { BuildingOfficeIcon, BriefcaseIcon, PencilSquareIcon, InformationCircleIcon } from "@heroicons/react/24/outline";
 import { CheckBadgeIcon } from "@heroicons/react/24/solid";
 import { NextPage } from "next";
@@ -58,7 +58,7 @@ const RecruiterProfile: NextPage = () => {
     const { name, role, company, hiring, languages, experience, education, desiredSkills, contact, bio } = recruiterInfo;
     const [selectedLink, setSelectedLink] = useState<RecruiterLink>({ link: "", isSelected: false });
     const [showExtraInfo, setShowExtraInfo] = useState<boolean>(false);
-    const [progressLevel, setProgressLevel] = useState<number>(6);
+    const [progressLevel, setProgressLevel] = useState<number>(45);
 
     const [modal, setModal] = useState<boolean>(false)
     const [editTitle, setEditTitle] = useState<string>("form")
@@ -71,6 +71,7 @@ const RecruiterProfile: NextPage = () => {
 
     // Close modal
     const handleEditInfo = ({ section }: { section: string }) => {
+
         switch (section) {
             case "bio":
                 setEditTitle("bio")
@@ -81,58 +82,22 @@ const RecruiterProfile: NextPage = () => {
                 setEditItems(contact)
                 break;
             case "languages":
-                let all_languages = {}
-                let language_info_index = 0
-                for (let language of languages) {
-                    language_info_index++
-                    for (const [_key, value] of Object.entries(language)) {
-                        all_languages = {
-                            ...all_languages, [`${_key}#${language_info_index}`]: value
-                        }
-                    }
-                }
+                let all_languages = getValuesFromObjectState(languages);
                 setEditTitle("languages")
                 setEditItems({ ...all_languages })
                 break;
             case "desiredSkills":
-                let allskills = {}
-                let skills_info_index = 0
-                for (let skill of desiredSkills) {
-                    skills_info_index++
-                    for (const [_key, value] of Object.entries(skill)) {
-                        allskills = {
-                            ...allskills, [`${_key}#${skills_info_index}`]: value
-                        }
-                    }
-                }
+                let allskills = getValuesFromObjectState(desiredSkills);
                 setEditTitle("desired skills")
                 setEditItems({ ...allskills })
                 break;
             case "education":
-                let alleducation = {}
-                let education_info_index = 0
-                for (let edu of education) {
-                    education_info_index++
-                    for (const [_key, value] of Object.entries(edu)) {
-                        alleducation = {
-                            ...alleducation, [`${_key}#${education_info_index}`]: value
-                        }
-                    }
-                }
+                let alleducation = getValuesFromObjectState(education);
                 setEditTitle("education")
                 setEditItems({ ...alleducation })
                 break;
             case "experience":
-                let allexperience = {}
-                let experience_info_index = 0
-                for (let exp of experience) {
-                    experience_info_index++
-                    for (const [_key, value] of Object.entries(exp)) {
-                        allexperience = {
-                            ...allexperience, [`${_key}#${experience_info_index}`]: value
-                        }
-                    }
-                }
+                let allexperience = getValuesFromObjectState(experience);
                 setEditTitle("experience")
                 setEditItems({ ...allexperience })
                 break;
@@ -141,13 +106,37 @@ const RecruiterProfile: NextPage = () => {
         setModal(!modal)
     }
 
+    // Compute values from properties of the Recruiter Info
+    const getValuesFromObjectState = (objectFromState: Array<string> | Array<object>) => {
+        let all_items = {}
+        let _info_index = 0
+        for (let property of objectFromState) {
+            _info_index++;
+            for (const [_key, value] of Object.entries(property)) {
+                all_items = {
+                    ...all_items, [`${_key}#${_info_index}`]: value
+                }
+            }
+        }
+        return all_items;
+    }
+
+    // Capture input value from the form
     const handleInputValue = (e: ChangeEvent<HTMLInputElement>, key: string) => {
         setEditItems({
             ...editItems,
             [key]: e.target.value
         })
+
+        // alert(JSON.stringify(key.split(RegExp('#'))[0]))
+
+        let _key = key.split(RegExp('#'))[0];
+        let _keyInTheOriginalSet = key.split(RegExp('#'))[1];    
+        
+        
     }
 
+    // Save new info
     const handleSaveEditedItems = (items: object) => {
         setRecruiterInfo({
             ...recruiterInfo,
