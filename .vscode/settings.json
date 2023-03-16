@@ -10,7 +10,5 @@
     "yaml.schemas": {
         "https://json.schemastore.org/github-workflow.json": "${workspaceRoot}/.github/workflows/deploy.yml"
     },
-    "[typescriptreact]": {
-        "editor.defaultFormatter": "vscode.typescript-language-features"
-    }
+    "typescript.tsdk": "node_modules/typescript/lib"
 }
